@@ -96,13 +96,15 @@ Load sample data including an admin user, sample documents, and diagram template
 
 ```bash
 cd backend
-node seed.js
+npm run seed
 ```
 
 This creates:
-- Admin user: `admin@example.com` / `admin123`
+- Admin user (credentials from .env: default is `admin@example.com` / `DevOnly123!`)
 - Sample technical documents
 - Three diagram templates
+
+**IMPORTANT**: The seed credentials are in your `.env` file and are for DEVELOPMENT ONLY. Never use these in production!
 
 ## Running the Application
 
@@ -131,10 +133,12 @@ The application will be available at:
 ### First Login
 
 If you ran the seed script:
-- Email: `admin@example.com`
-- Password: `admin123`
+- Email: `admin@example.com` (or value from `.env`)
+- Password: `DevOnly123!` (or value from `.env`)
 
 Otherwise, register a new account at http://localhost:3000/register
+
+**Security Note**: Change these credentials immediately if you plan to deploy this application!
 
 ### User Roles
 

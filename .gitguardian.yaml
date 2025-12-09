@@ -1,0 +1,9 @@
+# GitGuardian configuration
+# https://docs.gitguardian.com/internal-repositories-monitoring/integrations/git_hooks/pre_commit
+
+# Ignore development seed files that contain intentional test credentials
+paths-ignore:
+  - backend/seed.js
+  - backend/.env.example
+  - README.md
+  - SECURITY.md

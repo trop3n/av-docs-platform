@@ -1,0 +1,3 @@
+# Mark development seed files for security scanners
+# These files contain intentional development-only credentials
+backend/seed.js linguist-generated=true

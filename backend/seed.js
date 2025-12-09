@@ -6,6 +6,10 @@ import Diagram from './models/Diagram.js';
 
 dotenv.config();
 
+// WARNING: This seed script is for DEVELOPMENT ONLY
+// Do NOT use these credentials in production
+// Set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD in your .env file
+
 const seedDatabase = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
@@ -17,11 +21,15 @@ const seedDatabase = async () => {
     await Diagram.deleteMany({});
     console.log('Cleared existing data');
 
-    // Create admin user
+    // Create admin user from environment variables
+    const adminEmail = process.env.SEED_ADMIN_EMAIL || 'admin@example.com';
+    const adminPassword = process.env.SEED_ADMIN_PASSWORD || 'ChangeMe123!';
+    const adminUsername = process.env.SEED_ADMIN_USERNAME || 'admin';
+
     const adminUser = await User.create({
-      username: 'admin',
-      email: 'admin@example.com',
-      password: 'admin123',
+      username: adminUsername,
+      email: adminEmail,
+      password: adminPassword,
       role: 'admin'
     });
     console.log('Created admin user');
@@ -450,10 +458,11 @@ Dante is a combination of software, hardware, and network protocols that deliver
     console.log(`Created ${createdDiagrams.length} sample diagram templates`);
 
     console.log('\n=== Seed Data Summary ===');
-    console.log(`Admin User: admin@example.com / admin123`);
+    console.log(`Admin User: ${adminEmail} / ${adminPassword}`);
     console.log(`Documents: ${createdDocs.length}`);
     console.log(`Diagram Templates: ${createdDiagrams.length}`);
     console.log('\nSeeding completed successfully!');
+    console.log('\nWARNING: Change the admin password immediately in production!');
 
     process.exit(0);
   } catch (error) {
